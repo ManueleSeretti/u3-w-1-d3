@@ -5,10 +5,10 @@ import SingleBook from "./SingleBook";
 class ListBooks extends Component {
   state = {
     name: "",
-    bookSearch: [],
+    bookSearch: this.props.books,
   };
   filterBookList = (valore) => {
-    const bookFilter = this.props.books.filter((book) => book.title.toLowerCase() === valore);
+    const bookFilter = this.props.books.filter((book) => book.title.toLowerCase().includes(valore));
     console.log(bookFilter);
     this.setState({ bookSearch: bookFilter });
   };
@@ -34,7 +34,7 @@ class ListBooks extends Component {
             />
           </InputGroup>
           <Row className="row row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 gy-3">
-            {this.props.books.map((book, index) => (
+            {this.state.bookSearch.map((book, index) => (
               <Col key={index}>
                 <SingleBook book={book} />
               </Col>
